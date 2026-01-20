@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kritika Murali - Cloud Engineer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
+    body{background:#111;color:#fff;overflow-x:hidden;}
+    a{color:#ffcc00;text-decoration:none;}
+    img{max-width:100%;display:block;}
+
+    /* Header */
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;background:rgba(17,17,17,0.95);padding:15px 50px;z-index:1000;transition:padding 0.3s,background 0.3s;}
+    header.shrink{padding:8px 50px;background:rgba(17,17,17,0.99);}
+    header .logo h2{color:#ffcc00;}
+    nav a{margin-left:25px;font-weight:bold;transition:color 0.3s;}
+    nav a:hover,nav a.active{color:#fff;border-bottom:2px solid #ffcc00;}
+
+    /* Hero Section */
+    .hero{
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(160deg,#1e1e2f,#111);
+    }
+    .hero::before{
+      content:'';
+      position:absolute;top:0;left:0;width:100%;height:100%;
+      background: rgba(0,0,0,0.3);
+      z-index:0;
+    }
+    .hero-content{
+      position:relative; z-index:2; max-width:600px; margin-left:50px;
+    }
+    .hero-content h1{
+      font-size:3rem; margin-bottom:20px; overflow:hidden;
+      border-right:.15em solid #ffcc00; white-space:nowrap; width:0;
+      animation: typing 4s steps(40) forwards, blink 0.7s step-end infinite alternate;
+    }
+    .hero-content p{ font-size:1.2rem; color:#ccc; margin-bottom:30px; }
+    .hero-content .btn{ background:#ffcc00; color:#111; padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition: transform 0.3s, box-shadow 0.3s; }
+    .hero-content .btn:hover{ transform: translateY(-3px); box-shadow:0 0 15px #ffcc00; }
+
+    @keyframes typing{ to { width:100%; } }
+    @keyframes blink{ 50% { border-color:transparent; } }
+
+    /* Clouds */
+    .clouds{ position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
+    .cloud{
+      position:absolute;
+      background: #fff;
+      opacity:0.15;
+      border-radius:50%;
+      box-shadow:0 0 40px 10px rgba(255,255,255,0.1);
+    }
+
+    /* Sky Gradient Animation */
+    @keyframes skyShift{
+      0%{background:linear-gradient(160deg,#1e1e2f,#111);}
+      50%{background:linear-gradient(160deg,#2e2e48,#111);}
+      100%{background:linear-gradient(160deg,#1e1e2f,#111);}
+    }
+    .hero{ animation: skyShift 30s infinite alternate; }
+
+    /* Sections */
+    section{padding:80px 50px;}
+    h2{color:#ffcc00; margin-bottom:25px; text-align:center;}
+
+    /* Skills */
+    .skills-list{ display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+    .skill-card{ background:#222; padding:20px; border-radius:12px; width:150px; text-align:center; transition: transform 0.3s, background 0.3s; }
+    .skill-card:hover{ transform:scale(1.1); background:#333; }
+    .skill-bar{ background:#333; border-radius:10px; overflow:hidden; margin-top:10px; height:12px; }
+    .skill-fill{ background:#ffcc00; height:100%; width:0; }
+
+    /* Tools */
+    .tools-list{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
+    .tools-list div{ background:#222; padding:12px 18px; border-radius:10px; transition: transform 0.3s; }
+    .tools-list div:hover{ transform:scale(1.1); }
+
+    /* Projects */
+    .projects{ display:flex; flex-direction:column; gap:40px; }
+    .project{ display:flex; gap:30px; flex-wrap:wrap; background:#222; border-radius:15px; overflow:hidden; transition: transform 0.3s; position:relative; }
+    .project:hover{ transform:scale(1.02); }
+    .project img{ width:300px; }
+    .project-info{ padding:20px; flex:1; }
+    .project-info h3{ color:#ffcc00; margin-bottom:10px; }
+    .project-overlay{ position:absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); color:#fff; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s; }
+    .project:hover .project-overlay{ opacity:1; }
+
+    /* Contact */
+    .contact form{ display:flex; flex-direction:column; gap:15px; max-width:500px; margin:auto; }
+    .contact input,.contact textarea{ padding:12px; border-radius:10px; border:none; background:#222; color:#fff; transition: transform 0.2s, outline 0.2s; }
+    .contact input:focus,.contact textarea:focus{ outline:2px solid #ffcc00; transform:scale(1.02); }
+    .contact button{ padding:12px; border:none; border-radius:10px; background:#ffcc00; color:#111; font-weight:bold; cursor:pointer; transition: transform 0.3s, box-shadow 0.3s; }
+    .contact button:hover{ transform:translateY(-3px); box-shadow:0 0 15px #ffcc00; }
+
+    /* Footer */
+    footer{ background:#111; padding:20px 50px; display:flex; justify-content: space-between; flex-wrap:wrap; }
+    footer div{ display:flex; align-items:center; gap:15px; }
+
+    /* Back-to-top */
+    #backTop{ position: fixed; bottom:30px; right:30px; background:#ffcc00; color:#111; border:none; padding:12px 15px; border-radius:50%; cursor:pointer; display:none; z-index:1000; transition: transform 0.3s, box-shadow 0.3s; }
+    #backTop:hover{ transform:translateY(-3px); box-shadow:0 0 15px #ffcc00; }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .hero{ flex-direction: column; text-align:center; justify-content:center; align-items:center; padding:20px; }
+      .hero-content{ margin-left:0; }
+      .hero-content h1{ font-size:2rem; }
+      .hero-content p{ font-size:1rem; }
+      .project{ flex-direction:column; align-items:center; }
+      header{ padding:10px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><h2>Kritika Murali</h2></div>
+  <nav>
+    <a href="#home" class="active">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="clouds" id="clouds"></div>
+  <div class="hero-content">
+    <h1>Hello, I'm Kritika Murali</h1>
+    <p>Cloud Engineer | AWS, DevOps, IAM | Building scalable cloud solutions</p>
+    <button class="btn">Hire Me</button>
+  </div>
+</section>
+
+<section class="skills" id="skills">
+  <h2>My Skills</h2>
+  <div class="skills-list">
+    <div class="skill-card" data-skill="90%">AWS Cloud<div class="skill-bar"><div class="skill-fill"></div></div></div>
+    <div class="skill-card" data-skill="85%">IAM<div class="skill-bar"><div class="skill-fill"></div></div></div>
+    <div class="skill-card" data-skill="80%">DevOps<div class="skill-bar"><div class="skill-fill"></div></div></div>
+    <div class="skill-card" data-skill="70%">Cloud Rally<div class="skill-bar"><div class="skill-fill"></div></div></div>
+  </div>
+
+  <h2>Tools & Technologies</h2>
+  <div class="tools-list">
+    <div>AWS Console</div>
+    <div>Terraform</div>
+    <div>Docker</div>
+    <div>Linux CLI</div>
+    <div>CloudWatch</div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <h2>Recent Projects</h2>
+  <div class="project" data-aos="fade-up">
+    <img src="https://via.placeholder.com/300x200" alt="Project 1">
+    <div class="project-info"><h3>Cloud Infrastructure Setup</h3><p>Designed and deployed AWS infrastructure with secure IAM policies and monitoring.</p></div>
+  </div>
+  <div class="project" data-aos="fade-up">
+    <img src="https://via.placeholder.com/300x200" alt="Project 2">
+    <div class="project-info"><h3>Cloud Migration</h3><p>Migrated on-premise servers to AWS Cloud with automation and secure access.</p></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Let's Collaborate</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <div>Email: <a href="mailto:kritika@example.com">kritika@example.com</a></div>
+  <div>
+    <a href="#">LinkedIn</a>
+    <a href="#">GitHub</a>
+    <a href="#">Portfolio</a>
+  </div>
+</footer>
+
+<button id="backTop">↑</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  // Header shrink & back-to-top
+  window.addEventListener('scroll', function(){
+    document.querySelector('header').classList.toggle('shrink', window.scrollY > 50);
+    document.getElementById('backTop').style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  document.getElementById('backTop').addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Animate skill bars
+  const skillCards = document.querySelectorAll('.skill-card');
+  window.addEventListener('scroll', () => {
+    skillCards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 50){
+        const fill = card.querySelector('.skill-fill');
+        fill.style.width = card.dataset.skill;
+      }
+    });
+  });
+
+  // Initialize AOS
+  AOS.init({ duration: 1000, once: true });
+
+  // Cloud Parallax & Floating
+  const cloudsContainer = document.getElementById('clouds');
+  const cloudCount = 25;
+  let cloudsData = [];
+  for(let i=0;i<cloudCount;i++){
+    const cloud = document.createElement('div');
+    cloud.classList.add('cloud');
+    let size = Math.random()*80+50;
+    let speed = Math.random()*0.3+0.05;
+    let x = Math.random()*window.innerWidth;
+    let y = Math.random()*window.innerHeight*0.8;
+    cloud.style.width = size+'px';
+    cloud.style.height = size+'px';
+    cloud.style.top = y+'px';
+    cloud.style.left = x+'px';
+    cloudsContainer.appendChild(cloud);
+    cloudsData.push({el:cloud, speed:speed, x:x, y:y});
+  }
+
+  function animateClouds(){
+    cloudsData.forEach(c=>{
+      c.x += c.speed;
+      if(c.x > window.innerWidth + 100) c.x = -100;
+      c.el.style.left = c.x + 'px';
+    });
+    requestAnimationFrame(animateClouds);
+  }
+  animateClouds();
+
+  // Mouse parallax for clouds
+  window.addEventListener('mousemove', e=>{
+    const xPercent = e.clientX/window.innerWidth - 0.5;
+    const yPercent = e.clientY/window.innerHeight - 0.5;
+    cloudsData.forEach(c=>{
+      c.el.style.transform = `translate(${xPercent*50*c.speed}px, ${yPercent*25*c.speed}px)`;
+    });
+  });
+</script>
+</body>
+</html>
